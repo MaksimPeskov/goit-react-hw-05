@@ -1,0 +1,14 @@
+.container {
+  padding: 40px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00d4ff, #007bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 30px;
+  text-align: center;
+}

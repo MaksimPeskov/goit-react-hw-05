@@ -1,0 +1,7 @@
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  min-height: 100vh;
+}
