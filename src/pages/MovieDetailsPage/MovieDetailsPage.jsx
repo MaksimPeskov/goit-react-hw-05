@@ -6,7 +6,7 @@ import {
   Outlet,
   Link,
 } from "react-router-dom";
-import { fetchMovieDetails, getImageUrl } from "../../api";
+import { fetchMovieDetails, getImageUrl } from "../../Api";
 import styles from "./MovieDetailsPage.module.css";
 
 function MovieDetailsPage() {

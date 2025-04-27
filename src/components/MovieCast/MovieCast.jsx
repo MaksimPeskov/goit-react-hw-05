@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchMovieCredits, getImageUrl } from "../../api";
+import { fetchMovieCredits, getImageUrl } from "../../Api";
 import styles from "./MovieCast.module.css";
 
 function MovieCast() {
