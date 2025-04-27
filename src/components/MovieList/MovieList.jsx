@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { getImageUrl } from "../../Api";
+import { getImageUrl } from "../../api";
 import styles from "./MovieList.module.css";
 
 function MovieList({ movies }) {

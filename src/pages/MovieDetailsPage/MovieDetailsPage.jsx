@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import {
   useParams,
   useNavigate,
@@ -6,7 +6,7 @@ import {
   Outlet,
   Link,
 } from "react-router-dom";
-import { fetchMovieDetails, getImageUrl } from "../../Api";
+import { fetchMovieDetails, getImageUrl } from "../../api";
 import styles from "./MovieDetailsPage.module.css";
 
 function MovieDetailsPage() {
@@ -14,10 +14,11 @@ function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const previousLocationRef = useRef(null);
 
   useEffect(() => {
     if (location.state?.from?.pathname) {
-      localStorage.setItem("lastPage", location.state.from.pathname);
+      previousLocationRef.current = location.state.from.pathname;
     }
   }, [location.state]);
 
@@ -36,7 +37,7 @@ function MovieDetailsPage() {
   }, [movieId, movie]);
 
   const handleGoBack = () => {
-    const from = localStorage.getItem("lastPage") || "/";
+    const from = previousLocationRef.current || "/";
     navigate(from);
   };
 

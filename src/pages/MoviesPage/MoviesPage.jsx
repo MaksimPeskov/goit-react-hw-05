@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
-import { searchMovies } from "../../Api";
+import { useSearchParams } from "react-router-dom";
+import { searchMovies } from "../../api";
 import MovieList from "../../components/MovieList/MovieList";
 import styles from "./MoviesPage.module.css";
 
 function MoviesPage() {
-  const [searchQuery, setSearchQuery] = useState(
-    localStorage.getItem("searchQuery") || ""
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
 
+  const searchQuery = searchParams.get("query") || "";
+
   useEffect(() => {
-    if (!searchQuery) return;
+    if (!searchQuery) {
+      setMovies([]);
+      return;
+    }
 
     const fetchMovies = async () => {
       try {
@@ -24,14 +28,14 @@ function MoviesPage() {
     fetchMovies();
   }, [searchQuery]);
 
-  useEffect(() => {
-    localStorage.setItem("searchQuery", searchQuery);
-  }, [searchQuery]);
-
   const handleSearch = (e) => {
     e.preventDefault();
     const query = e.target.elements.query.value.trim();
-    setSearchQuery(query);
+    if (query) {
+      setSearchParams({ query });
+    } else {
+      setSearchParams({});
+    }
   };
 
   return (
@@ -42,8 +46,7 @@ function MoviesPage() {
           name="query"
           placeholder="Search movies..."
           className={styles.input}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          defaultValue={searchQuery}
         />
         <button type="submit" className={styles.button}>
           Search
